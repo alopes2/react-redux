@@ -6,6 +6,12 @@ const initialState = {
     results: []
 }
 
+const deleteResult = (state, action) => {
+    console.log(action.index);
+    const updatedResults = state.results.filter((result, index) => index !== action.index);
+    return updateObject(state, {results: updatedResults});
+};
+
 const reducer = (state = initialState, action) => {
     console.log('Type: ', action.type);
     switch(action.type) {
@@ -21,9 +27,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.DELETE_RESULT:
             // let updatedResults = [...state.results];
             // updatedResults.splice(action.value, 1);
-            console.log(action.index);
-            const updatedResults = state.results.filter((result, index) => index !== action.index);
-            return updateObject(state, {results: updatedResults});
+            return deleteResult(state, action);
         default: 
             console.log('Default')
             return state;
